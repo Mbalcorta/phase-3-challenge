@@ -1,14 +1,15 @@
 const router = require('express').Router()
 const dayValue = require('../js/getFunc')
 
-router.get('/api/days/:day', function (req, res) {
-  let query = req.params.day
+router.get('/api/days/:day', function (request, response) {
+  let query = request.params.day
   dayValue(query)
-  .then(response => {
-    res.send(response)
+  .then(data => {
+    response.set('Content-Type', 'text/plain')
+    response.status(200).send((data).toString())
   })
   .catch((error) => {
-    res.send(error)
+    response.status(400).send(error)
   })
 })
 
