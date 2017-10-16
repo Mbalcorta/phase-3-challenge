@@ -8,7 +8,6 @@ router.get('/api/days/:day', function (req, res) {
     res.send(response)
   })
   .catch((error) => {
-    console.log(error)
     res.send(error)
   })
 })
