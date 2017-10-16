@@ -2,7 +2,7 @@ const router = require('express').Router()
 const dayValue = require('../js/getFunc')
 
 router.get('/api/days/:day', function (request, response) {
-  let query = request.params.day
+  const query = request.params.day
   dayValue(query)
   .then(data => {
     response.set('Content-Type', 'text/plain')
