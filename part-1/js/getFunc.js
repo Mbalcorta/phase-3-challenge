@@ -3,8 +3,8 @@
  }
 
  const dayValue = (query) => {
+  const queryNumber = parseInt(query)
    return new Promise((resolve, reject) => {
-   let queryNumber = parseInt(query)
     for(var day in daysOfWeek) {
       if(daysOfWeek[day] === queryNumber) {
         resolve(day)
@@ -13,6 +13,5 @@
      reject(`'${query}' is not a valid day!`)
    })
   }
-
 
  module.exports = dayValue
