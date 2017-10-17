@@ -1,5 +1,6 @@
 const cartDetails = {
-  cartCount: 0
+  cartCount: 0,
+  cartItems: []
 }
 
 const displayCartTotal = () => {
@@ -16,12 +17,22 @@ const clearCart = () => {
   displayCartTotal()
 }
 
-const addToCartButtons = document.getElementsByTagName("button")
-for(var i = 1; i < addToCartButtons.length-1; i++){
-  addToCartButtons[i].onclick = updateCartCount
+const addItemsToCart = (buttonInfo) => {
+  cartDetails.cartItems.push({
+    'itemName': buttonInfo.path[1].children[0].innerText,
+    'itemCost': buttonInfo.path[1].children[1].innerText
+    })
 }
 
-document.getElementById('clear').onclick = clearCart
+const addToCartButtons = document.getElementsByTagName("button")
+for(var i = 1; i < addToCartButtons.length-1; i++){
+  addToCartButtons[i].addEventListener("click", updateCartCount, false)
+  addToCartButtons[i].addEventListener("click", function(buttonInfo){
+    addItemsToCart(buttonInfo)
+  }, false)
+}
+
+document.getElementById('clear').addEventListener("click", clearCart, false)
 
 // Get the modal
 var modal = document.getElementById('myModal');
