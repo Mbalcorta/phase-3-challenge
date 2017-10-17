@@ -14,7 +14,9 @@ const updateCartCount = () => {
 
 const clearCart = () => {
   cartDetails.cartCount = 0
+  cartDetails.cartItems = []
   displayCartTotal()
+  console.log(cartDetails)
 }
 
 const addItemsToCart = (buttonInfo) => {
