@@ -1,5 +1,5 @@
 {
-  "name": "part-2",
+  "name": "Command Line Grocery Store",
   "version": "1.0.0",
   "description": "Command Line Grocery Store",
   "main": "store.js",
@@ -7,18 +7,19 @@
     "test": "mocha",
     "start:dev": "nodemon",
     "db:create": "createdb grocery_store",
+    "db:seed": "psql grocery_cart < database/seed.sql",
     "db:drop": "dropdb grocery_store",
     "db:schema": "psql grocery_store < ./database/schema.sql",
     "db:reset": "npm run db:drop && npm run db:create && npm run db:schema"
   },
   "keywords": [],
-  "author": "",
+  "author": "Mateo",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.0.1"
   },
   "dependencies": {
-    "express": "^4.16.2"
+    "pg-promise": "^7.0.2"
   }
 }
