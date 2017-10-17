@@ -11,7 +11,7 @@
       <h1>Grocer</h1>
       <button type="button" id="cart-button">
         Cart
-        &nbsp;<span id="cart-item-count">(3)</span>
+        &nbsp;<span id="cart-item-count">(0)</span>
       </button>
     </header>
 
@@ -29,11 +29,13 @@
         <div id="produce">
           <ul class="item-section">
             <h3>Produce</h3>
-            <li class="item flex flex-row-between">
-              <span class="item-name">Onions</span>
-              <span class="item-price">$1.11</span>
-              <button type="button">Add to cart</button>
-            </li>
+              <div id="onion">
+                <li class="item flex flex-row-between">
+                    <span class="item-name">Onions</span>
+                    <span class="item-price">$1.11</span>
+                    <button type="button">Add to cart</button>
+                </li>
+              </div>
             <li class="item flex flex-row-between">
               <span class="item-name">Tomatoes</span>
               <span class="item-price">$1.56</span>
@@ -79,4 +81,5 @@
       </div>
     </div>
   </body>
+<script rel="text/javascript" src="grocer.js"></script>
 </html>
