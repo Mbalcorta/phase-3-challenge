@@ -5,29 +5,29 @@ const cartDetails = {
 
 //**** modal functions ****//
 const calculateSum = (arrayOfItems) => {
-  let total = 0;
-  if(arrayOfItems.length > 0) {
-     total =
-      arrayOfItems.map(element => {
-        return Number(element.itemCost.replace(/[^0-9\.-]+/g,""));
-      }).reduce((a, b) => {
-        return a + b
-      })
-  }
-  const itemLi = document.createElement('li')
-  itemLi.innerHTML = `<span>Total $${total.toFixed(2)}</span>`
-  document.getElementById('cart-items').appendChild(itemLi)
+  if(arrayOfItems.length > 0){
+    let total =
+        arrayOfItems.map(element => {
+          return Number(element.itemCost.replace(/[^0-9\.-]+/g,""));
+        }).reduce((a, b) => {
+          return a + b
+        })
+        const itemLi = document.createElement('div')
+        itemLi.setAttribute("id", "total");
+        itemLi.innerHTML = `Total $${total.toFixed(2)}`
+        document.getElementById('modal-footer').appendChild(itemLi)
+      }
 }
 
 const addItemsToModal = (arrayOfItems) => {
   arrayOfItems.forEach(element => {
     const itemLi = document.createElement('li')
+    itemLi.setAttribute("class", "item flex flex-row-between");
     itemLi.innerHTML = `
-    <span>${element.itemName}</span>
-    <span>${element.itemCost}</span>`
+    <span class="item-name">${element.itemName}</span>
+    <span class="item-price">${element.itemCost}</span>`
     document.getElementById('cart-items').appendChild(itemLi)
   })
-
   calculateSum(arrayOfItems)
 }
 
@@ -49,9 +49,13 @@ const updateCartCount = () => {
 const clearCart = () => {
   cartDetails.cartCount = 0
   cartDetails.cartItems = []
+  document.getElementById('total').innerText = `Total $0.00`
   clearItemsInModal()
   displayCartTotal()
-  calculateSum([])
+}
+
+const deleteTotalDiv = () => {
+  document.getElementById('total').remove()
 }
 
 const addItemsToCart = (buttonInfo) => {
@@ -83,6 +87,7 @@ document.getElementsByTagName("button")[0]
 document.getElementsByClassName("close")[0]
 .addEventListener("click", function(){
     modal.style.display = "none"
+    deleteTotalDiv()
   }, false)
 
 
