@@ -4,7 +4,24 @@ const cartDetails = {
 }
 
 const displayCartTotal = () => {
-  document.getElementById('cart-item-count').innerHTML = `(${cartDetails.cartCount})`
+  document.getElementById('cart-item-count').innerHTML =
+  `(${cartDetails.cartCount})`
+}
+
+const calculateSum = (arrayOfItems) => {
+  const priceArray = arrayOfItems.map(element => {
+    return Number(element.itemCost.replace(/[^0-9\.-]+/g,""));
+  })
+
+  const total = priceArray.reduce((a, b) => {
+    return a + b
+  })
+
+  const itemLi = document.createElement('li')
+  itemLi.innerHTML = `
+  <span>total ${total.toFixed(2)}</span>`
+
+  document.getElementById('cart-items').appendChild(itemLi)
 }
 
 const addItemsToModal = (arrayOfItems) => {
@@ -17,6 +34,7 @@ const addItemsToModal = (arrayOfItems) => {
 
     document.getElementById('cart-items').appendChild(itemLi)
   })
+  calculateSum(arrayOfItems)
 }
 
 const clearItemsInModal = () => {
