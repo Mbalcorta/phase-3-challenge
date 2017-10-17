@@ -3,35 +3,25 @@ const cartDetails = {
   cartItems: []
 }
 
-const displayCartTotal = () => {
-  document.getElementById('cart-item-count').innerHTML =
-  `(${cartDetails.cartCount})`
-}
-
+//**** modal functions ****//
 const calculateSum = (arrayOfItems) => {
-  const priceArray = arrayOfItems.map(element => {
-    return Number(element.itemCost.replace(/[^0-9\.-]+/g,""));
-  })
-
-  const total = priceArray.reduce((a, b) => {
-    return a + b
-  })
-
+  const total =
+    arrayOfItems.map(element => {
+      return Number(element.itemCost.replace(/[^0-9\.-]+/g,""));
+    }).reduce((a, b) => {
+      return a + b
+    })
   const itemLi = document.createElement('li')
-  itemLi.innerHTML = `
-  <span>total ${total.toFixed(2)}</span>`
-
+  itemLi.innerHTML = `<span>total ${total.toFixed(2)}</span>`
   document.getElementById('cart-items').appendChild(itemLi)
 }
 
 const addItemsToModal = (arrayOfItems) => {
   arrayOfItems.forEach(element => {
     const itemLi = document.createElement('li')
-
     itemLi.innerHTML = `
     <span>${element.itemName}</span>
     <span>${element.itemCost}</span>`
-
     document.getElementById('cart-items').appendChild(itemLi)
   })
   calculateSum(arrayOfItems)
@@ -39,6 +29,12 @@ const addItemsToModal = (arrayOfItems) => {
 
 const clearItemsInModal = () => {
   document.getElementById('cart-items').innerHTML = ""
+}
+
+//**** cart functions ****//
+const displayCartTotal = () => {
+  document.getElementById('cart-item-count').innerHTML =
+  `(${cartDetails.cartCount})`
 }
 
 const updateCartCount = () => {
@@ -68,24 +64,22 @@ for(var i = 1; i < addToCartButtons.length-1; i++){
   }, false)
 }
 
+//**** button event listeners ****//
 document.getElementById('clear').addEventListener("click", clearCart, false)
 
-// Get the modal
-var modal = document.getElementById('myModal');
+var modal = document.getElementById('myModal')
 
-// When the user clicks on the button, open the modal
-document.getElementsByTagName("button")[0].onclick = function() {
+document.getElementsByTagName("button")[0]
+.addEventListener("click", function() {
     modal.style.display = "block";
     addItemsToModal(cartDetails.cartItems)
-}
+  }, false)
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+document.getElementsByClassName("close")[0]
+.addEventListener("click", function(){
     modal.style.display = "none"
-}
+  }, false)
+
 
 
 
