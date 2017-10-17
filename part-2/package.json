@@ -1,5 +1,5 @@
 {
-  "name": "Command Line Grocery Store",
+  "name": "",
   "version": "1.0.0",
   "description": "Command Line Grocery Store",
   "main": "store.js",
@@ -7,7 +7,7 @@
     "test": "mocha",
     "start:dev": "nodemon",
     "db:create": "createdb grocery_store",
-    "db:seed": "psql grocery_cart < database/seed.sql",
+    "db:seed": "psql grocery_store < database/load-data.sql",
     "db:drop": "dropdb grocery_store",
     "db:schema": "psql grocery_store < ./database/schema.sql",
     "db:reset": "npm run db:drop && npm run db:create && npm run db:schema"
