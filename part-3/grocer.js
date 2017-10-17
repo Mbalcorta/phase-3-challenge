@@ -5,14 +5,17 @@ const cartDetails = {
 
 //**** modal functions ****//
 const calculateSum = (arrayOfItems) => {
-  const total =
-    arrayOfItems.map(element => {
-      return Number(element.itemCost.replace(/[^0-9\.-]+/g,""));
-    }).reduce((a, b) => {
-      return a + b
-    })
+  let total = 0;
+  if(arrayOfItems.length > 0) {
+     total =
+      arrayOfItems.map(element => {
+        return Number(element.itemCost.replace(/[^0-9\.-]+/g,""));
+      }).reduce((a, b) => {
+        return a + b
+      })
+  }
   const itemLi = document.createElement('li')
-  itemLi.innerHTML = `<span>total ${total.toFixed(2)}</span>`
+  itemLi.innerHTML = `<span>Total $${total.toFixed(2)}</span>`
   document.getElementById('cart-items').appendChild(itemLi)
 }
 
@@ -24,6 +27,7 @@ const addItemsToModal = (arrayOfItems) => {
     <span>${element.itemCost}</span>`
     document.getElementById('cart-items').appendChild(itemLi)
   })
+
   calculateSum(arrayOfItems)
 }
 
@@ -47,6 +51,7 @@ const clearCart = () => {
   cartDetails.cartItems = []
   clearItemsInModal()
   displayCartTotal()
+  calculateSum([])
 }
 
 const addItemsToCart = (buttonInfo) => {
