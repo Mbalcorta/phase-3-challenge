@@ -7,6 +7,22 @@ const displayCartTotal = () => {
   document.getElementById('cart-item-count').innerHTML = `(${cartDetails.cartCount})`
 }
 
+const addItemsToModal = (arrayOfItems) => {
+  arrayOfItems.forEach(element => {
+    const itemLi = document.createElement('li')
+
+    itemLi.innerHTML = `
+    <span>${element.itemName}</span>
+    <span>${element.itemCost}</span>`
+
+    document.getElementById('cart-items').appendChild(itemLi)
+  })
+}
+
+const clearItemsInModal = () => {
+  document.getElementById('cart-items').innerHTML = ""
+}
+
 const updateCartCount = () => {
   cartDetails.cartCount++
   displayCartTotal()
@@ -15,8 +31,8 @@ const updateCartCount = () => {
 const clearCart = () => {
   cartDetails.cartCount = 0
   cartDetails.cartItems = []
+  clearItemsInModal()
   displayCartTotal()
-  console.log(cartDetails)
 }
 
 const addItemsToCart = (buttonInfo) => {
@@ -42,6 +58,7 @@ var modal = document.getElementById('myModal');
 // When the user clicks on the button, open the modal
 document.getElementsByTagName("button")[0].onclick = function() {
     modal.style.display = "block";
+    addItemsToModal(cartDetails.cartItems)
 }
 
 // Get the <span> element that closes the modal
@@ -49,7 +66,7 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
-    modal.style.display = "none";
+    modal.style.display = "none"
 }
 
 
