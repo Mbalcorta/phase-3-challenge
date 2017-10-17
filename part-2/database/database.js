@@ -8,13 +8,8 @@ const connection = {
 
 const database = pgp(connection)
 
-const getAll = () => {
-  return database.any(
-    'SELECT * FROM grocery_items'
-  ).then(data => {
-    console.log(data)
-  })
-  .catch(console.error)
+const getActiveShoppers = () => {
+  return database.any('SELECT * FROM shoppers')
 }
 
-getAll()
+module.exports = {getActiveShoppers}
