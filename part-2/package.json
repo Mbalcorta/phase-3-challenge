@@ -1,10 +1,15 @@
 {
   "name": "part-2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Command Line Grocery Store",
   "main": "store.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start:dev": "nodemon",
+    "db:create": "createdb grocery_store",
+    "db:drop": "dropdb grocery_store",
+    "db:schema": "psql grocery_store < ./database/schema.sql",
+    "db:reset": "npm run db:drop && npm run db:create && npm run db:schema"
   },
   "keywords": [],
   "author": "",
