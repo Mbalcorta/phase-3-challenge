@@ -114,6 +114,10 @@ body {
   flex: 0;
 }
 
+li {
+    list-style: none;
+}
+
 /* The Modal (background) */
 .modal {
    display: none; /* Hidden by default */
