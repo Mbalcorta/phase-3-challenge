@@ -8,9 +8,11 @@ switch(firstArgument){
   case 'real-shoppers' :
     getActiveShoppers()
     .then(data => {
-      data.forEach(eachElement => {
-        process.stdout.write(`Shopper name: ${eachElement.name} Number Of Orders: ${eachElement.orders}\n`)
-      })
+      if(!module.parent){
+        data.forEach(eachElement => {
+          process.stdout.write(`Shopper name: ${eachElement.name} Number Of Orders: ${eachElement.orders}\n`)
+        })
+      }
       process.exit()
     })
     .catch((error) => {
@@ -21,7 +23,9 @@ switch(firstArgument){
   case 'shopper-orders':
     shoppersOrders(parseInt(secondArg[0]))
     .then(data => {
-      console.log(data)
+      if(!module.parent){
+        console.log(data)
+      }
       process.exit()
     })
     .catch((error) => {
@@ -32,9 +36,11 @@ switch(firstArgument){
   case 'product-list':
     productList(secondArg[0])
     .then(data => {
-      data.forEach(eachElement => {
-        process.stdout.write(`Item name: ${eachElement.itemname} Section: ${eachElement.section}\n`)
-      })
+     if(!module.parent){
+        data.forEach(eachElement => {
+          process.stdout.write(`Item name: ${eachElement.itemname} Section: ${eachElement.section}\n`)
+        })
+      }
       process.exit()
     })
     .catch((error) => {
