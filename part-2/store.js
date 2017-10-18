@@ -9,9 +9,13 @@ switch(firstArgument){
     getActiveShoppers()
     .then(data => {
       data.forEach(eachElement => {
-        process.stdout.write(`Shopper name: ${eachElement.name}\n`)
+        process.stdout.write(`Shopper name: ${eachElement.name} Number Of Orders: ${eachElement.orders}\n`)
       })
+      process.exit()
     })
-    .catch(console.error)
+    .catch((error) => {
+      console.log(error)
+      process.exit()
+    })
     break;
 }
