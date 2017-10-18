@@ -33,7 +33,7 @@ switch(firstArgument){
     productList(secondArg[0])
     .then(data => {
       data.forEach(eachElement => {
-        process.stdout.write(`Item name: ${eachElement.itemname} Sectiongit : ${eachElement.section}\n`)
+        process.stdout.write(`Item name: ${eachElement.itemname} Section: ${eachElement.section}\n`)
       })
       process.exit()
     })
