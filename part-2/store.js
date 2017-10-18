@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const {getActiveShoppers, shoppersOrders} = require('./database/database.js')
+const {getActiveShoppers, shoppersOrders, productList} = require('./database/database.js')
 const firstArgument = process.argv.slice(2)[0];
 const secondArg = process.argv.slice(3);
 
@@ -29,4 +29,22 @@ switch(firstArgument){
       process.exit()
     })
   break;
+  case 'product-list':
+    productList(secondArg[0])
+    .then(data => {
+      data.forEach(eachElement => {
+        process.stdout.write(`Item name: ${eachElement.itemname} Sectiongit : ${eachElement.section}\n`)
+      })
+      process.exit()
+    })
+    .catch((error) => {
+      console.log(error)
+      process.exit()
+    })
+  break;
+  default:
+  if(!module.parent){
+    process.stdout.write('Error: not a correct command, please try again\n')
+    process.exit()
+  }
 }
