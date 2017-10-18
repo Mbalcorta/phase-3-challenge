@@ -4,7 +4,7 @@ INSERT INTO shoppers(name) VALUES('Jenny'),('Sebastian'),('Heather'),('Sal'),('O
 INSERT INTO orders(shopperid) VALUES(1),(1),(4),(4),(3),(3),(3);
 
 INSERT INTO grocery_items(itemname, price, section) VALUES
-('apples', 2.99, 'produce'),
+('Apples', 2.99, 'produce'),
 ('Bacon',9.01,'meat'),
 ('Barbeque Sauce',16.96,'packaged'),
 ('Carrots',2.88,'produce'),
