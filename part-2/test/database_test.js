@@ -1,17 +1,29 @@
-const expect = require('chai').assert
+const assert = require('chai').assert
 const mocha = require('mocha')
-const { resetDB } = require('./dbUtilities')
-const {getActiveShoppers, shoppersOrders, productList, database} = require('../database/database')
+const {resetDB, addOneOrder, addOneItem} = require('./dbUtilities')
+const {getActiveShoppers, shoppersOrders, productList} = require('../database/database')
 
-describe("active shopper query", function(){
-  beforeEach('reset the db', resetDB)
-  describe('when given a task', function() {
-  it("it will post task to database", function(done){
-    getActiveShoppers()
-    .then(function(data){
-      console.log(data)
-      done()
+describe('Grocery Store query functions', function(){
+  beforeEach(resetDB)
+
+  describe('Active shoppers', function(){
+    it('It will return only users who have orders', function(){
+      return getActiveShoppers()
+      .then(function(data){
+        assert.equal(data.length, 3)
+        })
+        .catch(console.error)
       })
-    })
   })
+  describe('When a new shopper makes an order', function() {
+    beforeEach('addOrder', addOneItem)
+
+  it('It will return an array of four', function(){
+    // return getActiveShoppers()
+    // .then(function(data){
+    //   assert.deepEqual(data.length, 3)
+    //   })
+    //   .catch(console.error)
+    })
+  });
 })
