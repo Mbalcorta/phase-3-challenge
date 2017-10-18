@@ -19,3 +19,4 @@ CREATE TABLE orderItems (
   orderID INTEGER REFERENCES orders NOT NULL,
   groceryItem INTEGER REFERENCES grocery_items(itemid) NOT NULL
 );
+
