@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const {getActiveShoppers, shoppersOrders, productList} = require('./database/database.js')
+const print = require('node-print')
 const firstArgument = process.argv.slice(2)[0];
 const secondArg = process.argv.slice(3);
 
@@ -9,9 +10,7 @@ switch(firstArgument){
     getActiveShoppers()
     .then(data => {
       if(!module.parent){
-        data.forEach(eachElement => {
-          process.stdout.write(`Shopper name: ${eachElement.name} Number Of Orders: ${eachElement.orders}\n`)
-        })
+        print.pt(data)
       }
       process.exit()
     })
@@ -24,7 +23,7 @@ switch(firstArgument){
     shoppersOrders(parseInt(secondArg[0]))
     .then(data => {
       if(!module.parent){
-        console.log(data)
+        print.pt(data)
       }
       process.exit()
     })
@@ -36,10 +35,9 @@ switch(firstArgument){
   case 'product-list':
     productList(secondArg[0])
     .then(data => {
+
      if(!module.parent){
-        data.forEach(eachElement => {
-          process.stdout.write(`Item name: ${eachElement.itemname} Section: ${eachElement.section}\n`)
-        })
+        print.pt(data)
       }
       process.exit()
     })
