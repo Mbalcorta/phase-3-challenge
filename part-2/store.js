@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const {getActiveShoppers} = require('./database/database.js')
+const {getActiveShoppers, shoppersOrders} = require('./database/database.js')
 const firstArgument = process.argv.slice(2)[0];
-// const taskString = process.argv.slice(3).join(' ');
+const secondArg = process.argv.slice(3);
 
 switch(firstArgument){
   case 'real-shoppers' :
@@ -18,4 +18,15 @@ switch(firstArgument){
       process.exit()
     })
     break;
+  case 'shopper-orders':
+    shoppersOrders(parseInt(secondArg[0]))
+    .then(data => {
+      console.log(data)
+      process.exit()
+    })
+    .catch((error) => {
+      console.log(error)
+      process.exit()
+    })
+  break;
 }
