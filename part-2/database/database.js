@@ -1,10 +1,9 @@
+
 const pgp = require('pg-promise')()
 
-const connection = {
-  host: 'localhost',
-  port: 5432,
-  database: 'grocery_store'
-}
+const connection = process.env.NODE_ENV !== 'test'
+  ? 'postgres://localhost:5432/grocery_store'
+  : 'postgres://localhost:5432/grocery_store_test'
 
 const database = pgp(connection)
 
@@ -20,4 +19,4 @@ const productList = (param) => {
   return database.any(`SELECT i.itemname, i.section FROM grocery_items i WHERE section='${param}'`)
 }
 
-module.exports = {getActiveShoppers, shoppersOrders, productList}
+module.exports = {getActiveShoppers, shoppersOrders, productList, database}
