@@ -3,9 +3,9 @@ const {database} = require('../database/database.js')
 const initDB = () => {
   const tables = ['grocery_items', 'shoppers', 'orderitems', 'orders']
   return Promise.all(tables.map(table =>
-    database.none(`TRUNCATE TABLE ${table} RESTART IDENTITY CASCADE`)
-  )
-  ).catch(console.error)
+      database.none(`TRUNCATE TABLE ${table} RESTART IDENTITY CASCADE`)
+    ))
+    .catch(console.error)
 }
 
 const seedShoppers = () => {
@@ -61,20 +61,24 @@ const resetDB = () =>
   .then(seedOrders)
   .then(seedGroceryItems)
   .then(seedOrderItems)
-  .catch(console.error)
+.catch(console.error)
 
-
+// 'INSERT INTO orders(shopperid) VALUES($1)', [order]
 
 const addOneOrder = (shopperId) =>
-  Promise.all(
-    database.none('INSERT INTO orders(shopperid) VALUES($1)', [shopperId])
-  ).catch(console.error)
-
-const addOneItem = () =>
-  Promise.all(
-    database.none('INSERT INTO orderitems(orderID, groceryItem) VALUES(8, 6)')
-  ).catch(console.error)
+database.none('INSERT INTO orders(shopperid) VALUES($1)', [shopperId])
+.catch(console.error)
 
 
-module.exports = { resetDB, addOneOrder, addOneItem }
+
+const addOneItem = (orderId, groceryItem) =>
+database.none('INSERT INTO orderitems(orderID, groceryItem) VALUES($1, $2)', [orderId, groceryItem])
+.catch(console.error)
+
+
+const addOneShopper = (name) =>
+database.none('INSERT INTO shoppers(name) VALUES($1)', [name])
+.catch(console.error)
+
+module.exports = { resetDB, addOneOrder, addOneItem, addOneShopper}
 
