@@ -20,6 +20,7 @@ const calculateSum = (arrayOfItems) => {
 }
 
 const addItemsToModal = (arrayOfItems) => {
+
   arrayOfItems.forEach(element => {
     const itemLi = document.createElement('li')
     itemLi.setAttribute("class", "item flex flex-row-between");
@@ -56,6 +57,7 @@ const clearCart = () => {
 
 const deleteTotalDiv = () => {
   document.getElementById('total').remove()
+  document.getElementById('cart-items').innerHTML = ''
 }
 
 const addItemsToCart = (buttonInfo) => {
