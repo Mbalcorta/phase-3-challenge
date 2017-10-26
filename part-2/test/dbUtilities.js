@@ -9,16 +9,18 @@ const initDB = () => {
 }
 
 const seedShoppers = () => {
-  const names = ['Jenny', 'Sebastian', 'Heather', 'Sal', 'OJ', 'Sunshine']
-  return Promise.all(names.map(name =>
-    database.none('INSERT INTO shoppers(name) VALUES($1)', [name])
-  )
-  ).catch(console.error)
+  const sql = 'INSERT INTO shoppers(name) VALUES($1)';
+  return database.none(sql, 'Jenny')
+  .then(()=> database.none(sql, 'Sebastian'))
+  .then(()=> database.none(sql, 'Heather'))
+  .then(()=> database.none(sql, 'Sal'))
+  .then(()=> database.none(sql, 'OJ'))
+  .then(()=> database.none(sql, 'Sunshine'))
+  .catch(console.error)
 }
 
 const seedOrders = () => {
   const sql='INSERT INTO orders(shopperid) VALUES($1)';
-  // const orders = [1, 1, 4, 4, 3, 3, 3]
   return database.none(sql, 1)
   .then(()=> database.none(sql, 1))
   .then(()=> database.none(sql, 4))
