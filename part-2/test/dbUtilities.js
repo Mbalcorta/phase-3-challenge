@@ -17,25 +17,29 @@ const seedShoppers = () => {
 }
 
 const seedOrders = () => {
-  const orders = [1, 1, 4, 4, 3, 3, 3]
-  return Promise.all(orders.map(order =>
-    database.none('INSERT INTO orders(shopperid) VALUES($1)', [order])
-  )
-  ).catch(console.error)
+  const sql='INSERT INTO orders(shopperid) VALUES($1)';
+  // const orders = [1, 1, 4, 4, 3, 3, 3]
+  return database.none(sql, 1)
+  .then(()=> database.none(sql, 1))
+  .then(()=> database.none(sql, 4))
+  .then(()=> database.none(sql, 4))
+  .then(()=> database.none(sql, 3))
+  .then(()=> database.none(sql, 3))
+  .then(()=> database.none(sql, 3))
+  .catch(console.error)
 }
 
 const seedGroceryItems = () => {
-  const items =
-  [{itemname: 'Apples',price: 2.99, section: 'produce'},
-  {itemname: 'Bacon',price: 9.01, section: 'meat'},
-  {itemname: 'Barbeque Sauce',price: 16.96, section: 'packaged'},
-  {itemname: 'Carrots',price: 2.88, section: 'produce'},
-  {itemname: 'Cheese',price: 1.75, section: 'dairy'},
-  {itemname: 'Coffee',price: 6.17, section: 'packaged'}]
-  return Promise.all(items.map(item =>
-    database.none('INSERT INTO grocery_items(itemname, price, section) VALUES(${itemname}, ${price}, ${section})', item)
-  )
-  ).catch(console.error)
+  //first need to insert each item one at a time. once each item is included keep doing .then
+  const sql = 'INSERT INTO grocery_items(itemname, price, section) VALUES(${itemname}, ${price}, ${section})'
+  return database.none(sql, {itemname: 'Apples',price: 2.99, section: 'produce'})
+  .then(()=> database.none(sql, {itemname: 'Bacon',price: 9.01, section: 'meat'}))
+  .then(()=> database.none(sql, {itemname: 'Barbeque Sauce',price: 16.96, section: 'packaged'}))
+  .then(()=> database.none(sql, {itemname: 'Carrots',price: 2.88, section: 'produce'}))
+  .then(()=> database.none(sql, {itemname: 'Cheese',price: 1.75, section: 'dairy'}))
+  .then(()=> database.none(sql, {itemname: 'Coffee',price: 6.17, section: 'packaged'}))
+  .catch(console.error)
+
 }
 
 const seedOrderItems = () => {
@@ -63,18 +67,13 @@ const resetDB = () =>
   .then(seedOrderItems)
 .catch(console.error)
 
-// 'INSERT INTO orders(shopperid) VALUES($1)', [order]
-
 const addOneOrder = (shopperId) =>
 database.none('INSERT INTO orders(shopperid) VALUES($1)', [shopperId])
 .catch(console.error)
 
-
-
 const addOneItem = (orderId, groceryItem) =>
 database.none('INSERT INTO orderitems(orderID, groceryItem) VALUES($1, $2)', [orderId, groceryItem])
 .catch(console.error)
-
 
 const addOneShopper = (name) =>
 database.none('INSERT INTO shoppers(name) VALUES($1)', [name])
