@@ -4,14 +4,13 @@
   "description": "Command Line Grocery Store",
   "main": "store.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha",
+    "test": "NODE_ENV=test mocha --exit",
     "db:create": "createdb grocery_store",
     "db:seed": "psql grocery_store < database/load-data.sql",
     "db:drop": "dropdb grocery_store",
     "db:schema": "psql grocery_store < ./database/schema.sql",
     "db:reset": "npm run db:drop && npm run db:create && npm run db:schema && npm run db:seed",
     "db:createTest": "createdb grocery_store_test",
-    "db:seedTest": "psql grocery_store_test < database/load-data.sql",
     "db:dropTest": "dropdb grocery_store_test",
     "db:schemaTest": "psql grocery_store_test < ./database/schema.sql",
     "db:resetTest": "npm run db:dropTest && npm run db:createTest && npm run db:schemaTest"
