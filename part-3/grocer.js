@@ -67,6 +67,7 @@ const addItemsToCart = (buttonInfo) => {
     })
 }
 
+//**** button event listeners ****//
 const addToCartButtons = document.getElementsByTagName("button")
 for(var i = 1; i < addToCartButtons.length-1; i++){
   addToCartButtons[i].addEventListener("click", updateCartCount, false)
@@ -75,7 +76,6 @@ for(var i = 1; i < addToCartButtons.length-1; i++){
   }, false)
 }
 
-//**** button event listeners ****//
 document.getElementById('clear').addEventListener("click", clearCart, false)
 
 var modal = document.getElementById('myModal')
