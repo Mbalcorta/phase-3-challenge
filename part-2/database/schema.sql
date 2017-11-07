@@ -1,22 +1,23 @@
-CREATE TABLE grocery_items (
-  itemID SERIAL PRIMARY KEY,
-  itemName VARCHAR(255) NOT NULL UNIQUE,
+CREATE TABLE items (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL UNIQUE,
   section VARCHAR(255) NOT NULL,
-  price decimal(4, 2) NOT NULL
+  price DECIMAL(4, 2) NOT NULL
 );
 
 CREATE TABLE shoppers (
-  shopperId SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE orders (
-  orderID SERIAL PRIMARY KEY,
-  shopperId INTEGER REFERENCES shoppers NOT NULL
+  id SERIAL PRIMARY KEY,
+  shopper_id INTEGER REFERENCES shoppers(id) NOT NULL
 );
 
-CREATE TABLE orderItems (
-  orderID INTEGER REFERENCES orders NOT NULL,
-  groceryItem INTEGER REFERENCES grocery_items(itemid) NOT NULL
+CREATE TABLE orders_items (
+  id SERIAL PRIMARY KEY,
+  orders_id INTEGER REFERENCES orders(id) NOT NULL,
+  items_id INTEGER REFERENCES items(id) NOT NULL
 );
 
