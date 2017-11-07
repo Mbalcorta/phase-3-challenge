@@ -7,19 +7,17 @@ describe('Grocery Store query functions', function(){
 beforeEach(resetDB)
 
   describe('Active shoppers function', function(){
+
     it('It will return only users who have orders', function(){
      return getActiveShoppers()
        .then((data)=>{
          assert.equal(data.length, 3)
        })
     })
+
     describe('When a new shopper makes an order', function() {
-      beforeEach(()=> {
-        return addOneOrder(2)
-        .then(()=> {
-          return addOneItem(8,6)
-        })
-      })
+      beforeEach(() => addOneOrder(2).then(() => addOneItem(8,6)))
+
       it('It will return only users who have orders', function(){
        return getActiveShoppers()
        .then((data)=>{
@@ -27,36 +25,39 @@ beforeEach(resetDB)
        })
       })
     })
+
     describe('When a new shopper is added but does not make an order', function(){
-      beforeEach(()=>{
-        return addOneShopper('kiki')
-      })
+      beforeEach(() => addOneShopper('kiki'))
+
       it('It will return only users who have orders', function(){
         return getActiveShoppers()
-        .then((data)=>{
-          assert.equal(data.length, 3)
-        })
+          .then((data)=>{
+            assert.equal(data.length, 3)
+          })
       })
     })
     it('It will return array when active shoppers found', function(){
       return getActiveShoppers()
-      .then(function(data){
-        assert.isArray(data)
-      })
+        .then(function(data){
+          assert.isArray(data)
+        })
     })
     it('It will return an array with number of orders per shopper', function(){
       return getActiveShoppers()
-      .then(function(data){
-        assert.equal(data[0].number_of_orders, 3)
-      })
+        .then(function(data){
+          assert.equal(data[0].number_of_orders, 3)
+        })
     })
     it('It will return an array with name of active shoppers', function(){
       return getActiveShoppers()
-      .then(function(data){
-        assert.equal(data[0].shopper_name, 'Heather')
-      })
+        .then(function(data){
+          assert.equal(data[0].shopper_name, 'Heather')
+        })
     })
   })
+
+
+
   describe('Product list function', function(){
     describe('When a request is made for a specific type of product', function(){
       context('Such as dairy item', function(){
