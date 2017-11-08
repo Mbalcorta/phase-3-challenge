@@ -7,14 +7,12 @@ describe('Grocery Store query functions', function(){
 beforeEach(resetDB)
 
   describe('Active shoppers function', function(){
-
     it('It will return only users who have orders', function(){
      return getActiveShoppers()
        .then((data)=>{
          assert.equal(data.length, 3)
        })
     })
-
     describe('When a new shopper makes an order', function() {
       beforeEach(() => addOneOrder(2).then(() => addOneItem(8,6)))
 
@@ -25,7 +23,6 @@ beforeEach(resetDB)
        })
       })
     })
-
     describe('When a new shopper is added but does not make an order', function(){
       beforeEach(() => addOneShopper('kiki'))
 
@@ -55,8 +52,6 @@ beforeEach(resetDB)
         })
     })
   })
-
-
 
   describe('Product list function', function(){
     describe('When a request is made for a specific type of product', function(){
@@ -98,6 +93,7 @@ beforeEach(resetDB)
       })
     })
   })
+
   describe('Shoppers orders function', function(){
     describe('When user has orderItems', function(){
       it('It will return two orders for shopper number 4', function(){
