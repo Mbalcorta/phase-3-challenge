@@ -63,11 +63,11 @@ const seedOrderItems = () => {
 
 const resetDB = () =>
   initDB()
-.then(seedShoppers)
-.then(seedOrders)
-.then(seedGroceryItems)
-.then(seedOrderItems)
-.catch(console.error)
+    .then(seedShoppers)
+    .then(seedOrders)
+    .then(seedGroceryItems)
+    .then(seedOrderItems)
+    .catch(console.error)
 
 
 
